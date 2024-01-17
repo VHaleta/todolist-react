@@ -1,0 +1,54 @@
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-item-text {
+    flex: 1;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.task-item-checkbox {
+    margin-right: 10px;
+}
+
+.task-item-remove-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.task-item-remove-button:hover {
+    background-color: #ac2424;
+}
+
+.task-item-edit-button {
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-right: 10px;
+}
+
+.task-item-edit-button:hover {
+    background-color: #CD853F;
+}
+
+.task-item-edit-input {
+    font-family: inherit;
+}
