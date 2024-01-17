@@ -44,3 +44,18 @@
 .add-task-button:hover {
     background-color: #3e8e41;
 }
+
+.delete-all-complited-button{
+    margin-left: 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.delete-all-complited-button:hover {
+    background-color: #ac2424;
+}

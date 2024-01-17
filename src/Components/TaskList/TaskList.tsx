@@ -56,6 +56,12 @@ const TaskList = ({ tasks }: TaskListProps) => {
     loadTasksToStorage(copy)
   };
 
+  const onDeleteAllComplitedClick = () => {
+    const copy = tasksState.filter((task) => task.completed == false);
+    setTasksState(copy)
+    loadTasksToStorage(copy)
+  }
+
   const isEmpty: boolean = tasksState.length === 0;
   return (
     <div className="task-list">
@@ -70,6 +76,9 @@ const TaskList = ({ tasks }: TaskListProps) => {
         ></input>
         <button className="add-task-button" onClick={() => onAddClick()}>
           Add
+        </button>
+        <button className="delete-all-complited-button" onClick={() => onDeleteAllComplitedClick()}>
+          Delete all complited
         </button>
       </div>
       {isEmpty ? (
