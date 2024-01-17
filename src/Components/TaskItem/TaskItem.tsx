@@ -18,6 +18,10 @@ const TaskItem = ({ task, onRemove, onToggle, onEdit }: TaskProps) => {
   }
 
   const finishEditing = () => {
+    if(inputTextState == ''){
+      alert("Task text cannot be empty")
+      return;
+    }
     setIsEditingState(false)
     onEdit(task.id, inputTextState)
   }
