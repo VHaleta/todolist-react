@@ -31,20 +31,6 @@
     font-size: 18px;
 }
 
-.add-task-button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 0px 5px 5px 0px;
-    padding: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.add-task-button:hover {
-    background-color: #3e8e41;
-}
-
 .delete-all-complited-button{
     margin-left: 10px;
     background-color: #ff4d4d;

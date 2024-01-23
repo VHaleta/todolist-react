@@ -3,6 +3,10 @@ import { type Task } from "../../App";
 import { useState } from "react";
 import "./TaskList.css"
 
+import { Button } from "@mui/material";
+
+import { addButtonSx } from "./TaskListStyles";
+
 type TaskListProps = {
   tasks?: Array<Task>
 }
@@ -74,10 +78,17 @@ const TaskList = ({ tasks }: TaskListProps) => {
           }}
           value={inputState}
         ></input>
-        <button className="add-task-button" onClick={() => onAddClick()}>
+        <Button
+          variant="contained"
+          sx={addButtonSx}
+          onClick={() => onAddClick()}
+        >
           Add
-        </button>
-        <button className="delete-all-complited-button" onClick={() => onDeleteAllComplitedClick()}>
+        </Button>
+        <button
+          className="delete-all-complited-button"
+          onClick={() => onDeleteAllComplitedClick()}
+        >
           Delete all complited
         </button>
       </div>
