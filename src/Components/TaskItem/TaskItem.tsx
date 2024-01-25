@@ -1,34 +1,34 @@
 import { useRef, useState } from "react";
-import { type Task } from "../../App"
-import "./TaskItem.css"
+import { type Task } from "../../App";
+import "./TaskItem.css";
 
 type TaskProps = {
-    task: Task,
-    onRemove: (id: number) => void,
-    onToggle: (id: number) => void,
-    onEdit: (id: number, newText: string) => void
-}
+  task: Task;
+  onRemove: (id: number) => void;
+  onToggle: (id: number) => void;
+  onEdit: (id: number, newText: string) => void;
+};
 
 const TaskItem = ({ task, onRemove, onToggle, onEdit }: TaskProps) => {
-  const [isEditingState, setIsEditingState] = useState(false)
-  const [inputTextState, setTextInputState] = useState(task.text)
+  const [isEditingState, setIsEditingState] = useState(false);
+  const [inputTextState, setTextInputState] = useState(task.text);
 
   const beginEditing = () => {
-    setIsEditingState(true)
-  }
+    setIsEditingState(true);
+  };
 
   const finishEditing = () => {
-    if(inputTextState == ''){
-      alert("Task text cannot be empty")
+    if (inputTextState == "") {
+      alert("Task text cannot be empty");
       return;
     }
-    setIsEditingState(false)
-    onEdit(task.id, inputTextState)
-  }
+    setIsEditingState(false);
+    onEdit(task.id, inputTextState);
+  };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextInputState(e.target.value)
-  }
+    setTextInputState(e.target.value);
+  };
 
   const textDec = task.completed ? "line-through" : "";
   return (
@@ -66,4 +66,4 @@ const TaskItem = ({ task, onRemove, onToggle, onEdit }: TaskProps) => {
   );
 };
 
-export default TaskItem
+export default TaskItem;

@@ -1,4 +1,4 @@
-import TaskList from "./Components/TaskList/TaskList";
+import TaskList from "./components/TaskList/TaskList";
 import "./App.css";
 
 type AppProps = {};
