@@ -1,6 +1,14 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { type Task } from "../../App";
 import "./TaskItem.css";
+import { Button, Box, TextField, Checkbox } from "@mui/material";
+import {
+  editButtonSx,
+  removeButtonSx,
+  taskTextBoxSx,
+  editTextFieldSx,
+  taskItemBoxSx,
+} from "./TaskItemStyles";
 
 type TaskProps = {
   task: Task;
@@ -13,11 +21,19 @@ const TaskItem = ({ task, onRemove, onToggle, onEdit }: TaskProps) => {
   const [isEditingState, setIsEditingState] = useState(false);
   const [inputTextState, setTextInputState] = useState(task.text);
 
-  const beginEditing = () => {
+  const beginEditing: () => void = () => {
     setIsEditingState(true);
   };
 
-  const finishEditing = () => {
+  const onEditInputKeyUp: (e: React.KeyboardEvent<HTMLDivElement>) => void = (
+    e
+  ) => {
+    if (e.key === "Enter") {
+      finishEditing();
+    }
+  };
+
+  const finishEditing: () => void = () => {
     if (inputTextState == "") {
       alert("Task text cannot be empty");
       return;
@@ -26,43 +42,46 @@ const TaskItem = ({ task, onRemove, onToggle, onEdit }: TaskProps) => {
     onEdit(task.id, inputTextState);
   };
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onInputChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void = (e) => {
     setTextInputState(e.target.value);
   };
 
   const textDec = task.completed ? "line-through" : "";
   return (
-    <div className="task-item">
-      <input
-        type="checkbox"
-        className="task-item-checkbox"
-        checked={task.completed}
-        onChange={() => onToggle(task.id)}
-      />
-      <div className="task-item-text" style={{ textDecoration: textDec }}>
+    <Box sx={taskItemBoxSx}>
+      <Checkbox checked={task.completed} onChange={() => onToggle(task.id)} />
+      <Box sx={{ ...taskTextBoxSx, textDecoration: textDec }}>
         {isEditingState ? (
-          <input
+          <TextField
+            variant="standard"
             defaultValue={task.text}
-            className="task-item-edit-input task-item-text"
             onChange={(e) => onInputChange(e)}
-          ></input>
+            sx={editTextFieldSx}
+            onKeyUp={(e) => onEditInputKeyUp(e)}
+          />
         ) : (
           task.text
         )}
-      </div>
-      <button
-        className="task-item-edit-button"
+      </Box>
+      <Button
+        sx={editButtonSx}
+        variant="contained"
+        size="small"
         onClick={() => (isEditingState ? finishEditing() : beginEditing())}
       >
         {isEditingState ? "Finish" : "Edit"}
-      </button>
-      <button
-        className="task-item-remove-button"
+      </Button>
+      <Button
+        sx={removeButtonSx}
+        variant="contained"
+        size="small"
         onClick={() => onRemove(task.id)}
       >
         Remove
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 };
 
