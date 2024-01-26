@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { type Task } from "../../App";
-import "./TaskItem.css";
 import { Button, Box, TextField, Checkbox } from "@mui/material";
 import {
   editButtonSx,

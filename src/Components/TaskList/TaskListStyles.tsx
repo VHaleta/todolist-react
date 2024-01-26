@@ -16,6 +16,7 @@ export const deleteComplitedButtonSx = {
 
 export const inputTaskSx = {
   width: 1,
+  backgroundColor: "#ffffff",
 };
 
 export const addTaskFormSx = {
