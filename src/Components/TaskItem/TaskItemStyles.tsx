@@ -26,7 +26,7 @@ export const editTextFieldSx = {
 
 export const taskItemBoxSx = {
   display: "flex",
-  backgroundColor: "#ffffff",
+  backgroundColor: "taskItemBox.primary",
   alignItems: "center",
   p: 1,
   mt: 2,

@@ -16,7 +16,7 @@ export const deleteComplitedButtonSx = {
 
 export const inputTaskSx = {
   width: 1,
-  backgroundColor: "#ffffff",
+  // backgroundColor: "#ffffff",
 };
 
 export const addTaskFormSx = {
@@ -24,11 +24,21 @@ export const addTaskFormSx = {
 };
 
 export const taskListContainerSx = {
-  width: 600,
+  width: 640,
   m: "auto",
   mt: 5,
-  backgroundColor: "#f2f2f2",
+  backgroundColor: "taskListBox.primary",
   p: 2.5,
   borderRadius: "5px",
   boxShadow: 2,
+};
+
+export const headerBoxSx = {
+  display: "flex",
+  mb: 2,
+};
+
+export const headerHSx = {
+  width: "100%",
+  fontSize: "32px",
 };

@@ -1,15 +1,9 @@
 import TaskItem from "../TaskItem/TaskItem";
 import { type Task } from "../../App";
 import { useState } from "react";
+import NightModeToggle from "../NightModeToggle/NightModeToggle";
 
-import {
-  Button,
-  TextField,
-  Box,
-  ThemeProvider,
-  createTheme,
-  Typography,
-} from "@mui/material";
+import { Button, TextField, Box, createTheme, Typography } from "@mui/material";
 
 import {
   addButtonSx,
@@ -17,20 +11,13 @@ import {
   inputTaskSx,
   addTaskFormSx,
   taskListContainerSx,
+  headerBoxSx,
+  headerHSx,
 } from "./TaskListStyles";
-
-import { titleTheme, emptyListMessageTheme } from "./TaskListThemes";
 
 type TaskListProps = {
   tasks?: Array<Task>;
 };
-
-const theme = createTheme({
-  typography: {
-    h2: titleTheme,
-    h5: emptyListMessageTheme,
-  },
-});
 
 const TaskList = ({ tasks }: TaskListProps) => {
   const defaultTasks = [];
@@ -98,48 +85,51 @@ const TaskList = ({ tasks }: TaskListProps) => {
   const isEmpty: boolean = tasksState.length === 0;
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={taskListContainerSx}>
-        <Typography variant="h2">Task list</Typography>
-        <Box sx={addTaskFormSx}>
-          <TextField
-            variant="outlined"
-            size="small"
-            label="Task"
-            sx={inputTaskSx}
-            onChange={(e) => setInputState(e.target.value)}
-            value={inputState}
-          ></TextField>
-          <Button
-            variant="contained"
-            sx={addButtonSx}
-            onClick={() => onAddClick()}
-          >
-            Add
-          </Button>
-          <Button
-            variant="contained"
-            sx={deleteComplitedButtonSx}
-            onClick={() => onDeleteAllComplitedClick()}
-          >
-            Delete complited
-          </Button>
-        </Box>
-        {isEmpty ? (
-          <Typography variant="h5">No tasks to display</Typography>
-        ) : (
-          tasksState.map((task) => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onRemove={onRemove}
-              onToggle={onToggle}
-              onEdit={onEdit}
-            ></TaskItem>
-          ))
-        )}
+    <Box sx={taskListContainerSx}>
+      <Box sx={headerBoxSx}>
+        <Typography variant="h2" sx={headerHSx}>
+          Task list
+        </Typography>
+        <NightModeToggle />
       </Box>
-    </ThemeProvider>
+      <Box sx={addTaskFormSx}>
+        <TextField
+          variant="outlined"
+          size="small"
+          label="Task"
+          sx={inputTaskSx}
+          onChange={(e) => setInputState(e.target.value)}
+          value={inputState}
+        ></TextField>
+        <Button
+          variant="contained"
+          sx={addButtonSx}
+          onClick={() => onAddClick()}
+        >
+          Add
+        </Button>
+        <Button
+          variant="contained"
+          sx={deleteComplitedButtonSx}
+          onClick={() => onDeleteAllComplitedClick()}
+        >
+          Delete complited
+        </Button>
+      </Box>
+      {isEmpty ? (
+        <Typography variant="h5">No tasks to display</Typography>
+      ) : (
+        tasksState.map((task) => (
+          <TaskItem
+            key={task.id}
+            task={task}
+            onRemove={onRemove}
+            onToggle={onToggle}
+            onEdit={onEdit}
+          ></TaskItem>
+        ))
+      )}
+    </Box>
   );
 };
 
