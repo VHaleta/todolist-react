@@ -1,9 +1,9 @@
 import TaskItem from "../TaskItem/TaskItem";
-import { type Task } from "../../App";
-import { useState } from "react";
+import { type Task, tryValidateTask } from "../../App";
+import { useEffect, useState } from "react";
 import NightModeToggle from "../NightModeToggle/NightModeToggle";
 
-import { Button, TextField, Box, createTheme, Typography } from "@mui/material";
+import { Button, TextField, Box, Typography } from "@mui/material";
 
 import {
   addButtonSx,
@@ -16,73 +16,60 @@ import {
 } from "./TaskListStyles";
 
 type TaskListProps = {
-  tasks?: Array<Task>;
+  tasks: Array<Task>;
+  updateTasks: (tasks: Array<Task>) => void;
 };
 
-const TaskList = ({ tasks }: TaskListProps) => {
-  const defaultTasks = [];
-  if (tasks != undefined) defaultTasks.push(...tasks);
-  else {
-    defaultTasks.push(
-      ...JSON.parse(localStorage.getItem("tasks") ?? '{"tasks": []}').tasks
-    );
-  }
-
-  const [tasksState, setTasksState] = useState(defaultTasks);
+const TaskList = ({ tasks, updateTasks }: TaskListProps) => {
+  console.log(tasks);
   const [inputState, setInputState] = useState("");
+  const [update, updateComponent] = useState(true);
 
-  const loadTasksToStorage = (newTasks: Array<Task>) => {
-    localStorage.setItem("tasks", JSON.stringify({ tasks: [...newTasks] }));
-  };
+  useEffect(() => {
+    updateComponent(!update);
+  }, [tasks]);
 
   const onRemove = (id: number) => {
-    const copy = [...tasksState];
+    const copy = [...tasks];
     const removeIndex = copy.findIndex((task) => task.id == id);
     copy.splice(removeIndex, 1);
-    setTasksState(copy);
-    loadTasksToStorage(copy);
+    updateTasks(copy);
   };
 
   const onToggle = (id: number) => {
-    const copy = [...tasksState];
+    const copy = [...tasks];
     const updateIndex = copy.findIndex((task) => task.id == id);
     copy[updateIndex].completed = !copy[updateIndex].completed;
-    setTasksState(copy);
-    loadTasksToStorage(copy);
+    updateTasks(copy);
   };
 
   const onEdit = (id: number, newText: string) => {
-    const copy = [...tasksState];
+    const copy = [...tasks];
     const updateIndex = copy.findIndex((task) => task.id == id);
     copy[updateIndex].text = newText;
-    setTasksState(copy);
-    loadTasksToStorage(copy);
+    updateTasks(copy);
   };
 
   const onAddClick = () => {
-    if (inputState == "") return;
-    const isEmpty = tasksState.length <= 0;
-    const copy = [
-      ...tasksState,
-      {
-        id: isEmpty ? 0 : tasksState[tasksState.length - 1].id + 1,
-        text: inputState,
-        completed: false,
-      },
-    ];
+    const isEmpty = tasks.length <= 0;
+    const newTask = {
+      id: isEmpty ? 0 : tasks[tasks.length - 1].id + 1,
+      text: inputState,
+      completed: false,
+    };
+    if (!tryValidateTask(newTask, "On adding task")) return;
+    const copy = [...tasks, newTask];
     console.log(copy);
-    setTasksState(copy);
+    updateTasks(copy);
     setInputState("");
-    loadTasksToStorage(copy);
   };
 
   const onDeleteAllComplitedClick = () => {
-    const copy = tasksState.filter((task) => task.completed == false);
-    setTasksState(copy);
-    loadTasksToStorage(copy);
+    const copy = tasks.filter((task) => task.completed == false);
+    updateTasks(copy);
   };
 
-  const isEmpty: boolean = tasksState.length === 0;
+  const isEmpty: boolean = tasks.length === 0;
 
   return (
     <Box sx={taskListContainerSx}>
@@ -119,7 +106,7 @@ const TaskList = ({ tasks }: TaskListProps) => {
       {isEmpty ? (
         <Typography variant="h5">No tasks to display</Typography>
       ) : (
-        tasksState.map((task) => (
+        tasks.map((task) => (
           <TaskItem
             key={task.id}
             task={task}
