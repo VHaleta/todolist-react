@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { type Task } from "../../App";
 import { Button, Box, TextField, Checkbox } from "@mui/material";
 import {
   editButtonSx,
@@ -8,6 +7,7 @@ import {
   editTextFieldSx,
   taskItemBoxSx,
 } from "./TaskItemStyles";
+import { Task, tryValidateTask } from "../../helpers/typesHelper";
 
 type TaskProps = {
   task: Task;
@@ -33,11 +33,10 @@ const TaskItem = ({ task, onRemove, onToggle, onEdit }: TaskProps) => {
   };
 
   const finishEditing: () => void = () => {
-    if (inputTextState == "") {
-      alert("Task text cannot be empty");
-      return;
-    }
-    setIsEditingState(false);
+    if (
+      tryValidateTask({ id: task.id, text: inputTextState, completed: false })
+    )
+      setIsEditingState(false);
     onEdit(task.id, inputTextState);
   };
 

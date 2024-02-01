@@ -1,10 +1,6 @@
 import { PaletteMode } from "@mui/material";
 
-const theme = {
-  palette: {},
-};
-
-export const getDesignTokens = (mode: PaletteMode) => ({
+export const getThemeOptions = (mode: PaletteMode) => ({
   palette: {
     mode,
     ...(mode === "light"
@@ -68,5 +64,3 @@ export const getDesignTokens = (mode: PaletteMode) => ({
         }),
   },
 });
-
-export default theme;

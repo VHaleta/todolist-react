@@ -1,7 +1,6 @@
 import TaskItem from "../TaskItem/TaskItem";
-import { type Task, tryValidateTask } from "../../App";
 import { useEffect, useState } from "react";
-import NightModeToggle from "../NightModeToggle/NightModeToggle";
+import NightModeToggle from "../NightModeToggle/NightModeSwitch";
 
 import { Button, TextField, Box, Typography } from "@mui/material";
 
@@ -14,6 +13,7 @@ import {
   headerBoxSx,
   headerHSx,
 } from "./TaskListStyles";
+import { Task, tryValidateTask } from "../../helpers/typesHelper";
 
 type TaskListProps = {
   tasks: Array<Task>;
@@ -21,7 +21,6 @@ type TaskListProps = {
 };
 
 const TaskList = ({ tasks, updateTasks }: TaskListProps) => {
-  console.log(tasks);
   const [inputState, setInputState] = useState("");
   const [update, updateComponent] = useState(true);
 
