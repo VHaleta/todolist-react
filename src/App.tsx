@@ -1,8 +1,6 @@
 import TaskList from "./components/TaskList/TaskList";
-import "./App.css";
 import { useThemeContext } from "./theme/ThemeContextProvider";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-import NightModeToggle from "./components/NightModeToggle/NightModeToggle";
 
 type AppProps = {};
 

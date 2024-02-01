@@ -1,22 +1,23 @@
 export const addButtonSx = {
-  backgroundColor: "#4caf50",
+  color: "buttonTextColor",
+  backgroundColor: "addButton.bg.primary",
   mx: 1,
   "&:hover": {
-    backgroundColor: "#3e8e41",
+    backgroundColor: "addButton.bg.hover",
   },
 };
 
 export const deleteComplitedButtonSx = {
-  backgroundColor: "#ff4d4d",
+  color: "buttonTextColor",
+  backgroundColor: "removeButton.bg.primary",
   width: 300,
   "&:hover": {
-    backgroundColor: "#ac2424",
+    backgroundColor: "removeButton.bg.hover",
   },
 };
 
 export const inputTaskSx = {
   width: 1,
-  // backgroundColor: "#ffffff",
 };
 
 export const addTaskFormSx = {

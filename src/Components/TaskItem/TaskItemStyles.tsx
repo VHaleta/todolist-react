@@ -1,17 +1,19 @@
 export const editButtonSx = {
-  backgroundColor: "#FFA500",
+  color: "buttonTextColor",
+  backgroundColor: "editButton.bg.primary",
   mr: 1,
   ml: 2,
   "&:hover": {
-    backgroundColor: "#CD853F",
+    backgroundColor: "editButton.bg.hover",
   },
 };
 
 export const removeButtonSx = {
-  backgroundColor: "#ff4d4d",
+  color: "buttonTextColor",
+  backgroundColor: "removeButton.bg.primary",
   minWidth: 95,
   "&:hover": {
-    backgroundColor: "#ac2424",
+    backgroundColor: "removeButton.bg.hover",
   },
 };
 
